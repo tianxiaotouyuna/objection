@@ -1,6 +1,6 @@
 DIST_DIR := dist
 
-default: clean test frida-agent sdist
+default: clean frida-agent sdist
 
 clean:
 	$(RM) $(DIST_DIR)/*

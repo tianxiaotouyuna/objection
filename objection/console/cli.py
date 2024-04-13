@@ -16,7 +16,7 @@ from ..state.connection import state_connection
 
 
 def get_agent() -> Agent:
-    """ get_agent bootstraps an agent instance """
+    """ get_agent启动一个代理实例。"""
     agent = Agent(AgentConfig(
         name=state_connection.name,
         host=state_connection.host,
@@ -37,20 +37,20 @@ def get_agent() -> Agent:
 
 # Start the Click command group
 @click.group()
-@click.option('--network', '-N', is_flag=True, help='Connect using a network connection instead of USB.',
+@click.option('--network', '-N', is_flag=True, help='使用网络连接而不是USB连接。',
               show_default=True)
 @click.option('--host', '-h', default='127.0.0.1', show_default=True)
 @click.option('--port', '-p', required=False, default=27042, show_default=True)
 @click.option('--api-host', '-ah', default='127.0.0.1', show_default=True)
 @click.option('--api-port', '-ap', required=False, default=8888, show_default=True)
 @click.option('--name', '-n', required=False,
-              help='Name or bundle identifier to attach to.', show_default=True)
-@click.option('--serial', '-S', required=False, default=None, help='A device serial to connect to.')
+              help='要附加的名称或捆绑标识符。', show_default=True)
+@click.option('--serial', '-S', required=False, default=None, help='A device serial to connect to.连接到的设备序列号。')
 @click.option('--debug', '-d', required=False, default=False, is_flag=True,
-              help='Enable debug mode with verbose output.')
-@click.option('--spawn', '-s', required=False, is_flag=True, help='Spawn the target.')
-@click.option('--no-pause', '-p', required=False, is_flag=True, help='Resume the target immediately.')
-@click.option('--foremost', '-f', required=False, is_flag=True, help='Use the current foremost application.')
+              help='启用调试模式并输出详细信息。')
+@click.option('--spawn', '-s', required=False, is_flag=True, help='启动目标APP。')
+@click.option('--no-pause', '-p', required=False, is_flag=True, help='使用已打开的APP。')
+@click.option('--foremost', '-f', required=False, is_flag=True, help='Use the current foremost application.使用当前最先进的应用程序。')
 @click.option('--debugger', required=False, default=False, is_flag=True, help='Enable the Chrome debug port.')
 @click.option('--uid', required=False, default=None, help='Specify the uid to run as (Android only).')
 def cli(network: bool, host: str, port: int, api_host: str, api_port: int,
@@ -65,7 +65,7 @@ def cli(network: bool, host: str, port: int, api_host: str, api_port: int,
               |___|(object)inject(ion)
         \b
              Runtime Mobile Exploration
-                by: @leonjza from @sensepost123
+                by: @tianxiao from @github
     """
 
     if debug:
@@ -94,7 +94,7 @@ def cli(network: bool, host: str, port: int, api_host: str, api_port: int,
 @cli.command()
 def api():
     """
-        Start the objection API server in headless mode.
+        无界面模式下启动objection API服务器
     """
 
     agent = get_agent()
@@ -105,21 +105,21 @@ def api():
 
 
 @cli.command()
-@click.option('--plugin-folder', '-P', required=False, default=None, help='The folder to load plugins from.')
+@click.option('--plugin-folder', '-P', required=False, default=None, help='加载插件的文件夹。')
 @click.option('--quiet', '-q', required=False, default=False, is_flag=True)
 @click.option('--startup-command', '-s', required=False, multiple=True,
-              help='A command to run before the repl polls the device for information.')
+              help='在 repl 轮询设备获取信息之前要运行的命令。')
 @click.option('--file-commands', '-c', required=False, type=click.File('r'),
-              help=('A file containing objection commands, separated by a '
-                    'newline, that will run before the repl polls the device for information.'))
+              help=('一个包含objection命令的文件，由一个'
+                    '新命令行，这将在REPL轮询设备获取信息之前运行。'))
 @click.option('--startup-script', '-S', required=False, type=click.File('r'),
-              help='A script to import and run before the repl polls the device for information.')
+              help='一个脚本，用于在REPL轮询设备信息之前导入和运行。')
 @click.option('--enable-api', '-a', required=False, default=False, is_flag=True,
-              help='Start the objection API server.')
+              help='启动objection API服务器。')
 def start(plugin_folder: str, quiet: bool, startup_command: str, file_commands, startup_script: click.File,
           enable_api: bool) -> None:
     """
-        Start a new session
+        开始新的会话。
     """
 
     agent = get_agent()
@@ -128,19 +128,19 @@ def start(plugin_folder: str, quiet: bool, startup_command: str, file_commands, 
     # load plugins
     if plugin_folder:
         folder = Path(plugin_folder).resolve()
-        debug_print(f'[plugin] Plugins path is: {folder}')
+        debug_print(f'[plugin] 插件路径是: {folder}')
         for p in folder.iterdir():
             if p.is_file() or p.name.startswith('.'):
-                debug_print(f'[plugin] Skipping {p.name}')
+                debug_print(f'[plugin] 跳过 {p.name}')
                 continue
 
-            debug_print(f'[plugin] Attempting to load plugin at {p}')
+            debug_print(f'[plugin] 尝试在此处加载插件 {p}')
             load_plugin([p])
 
     repl = Repl()
 
     if startup_script:
-        click.secho(f'Importing and running startup script at: {startup_script}', dim=True)
+        click.secho(f'导入并运行启动脚本在: {startup_script}', dim=True)
         agent.attach_script(startup_script.read())
 
     if startup_command:
@@ -149,7 +149,7 @@ def start(plugin_folder: str, quiet: bool, startup_command: str, file_commands, 
             repl.run_command(command)
 
     if file_commands:
-        click.secho('Running commands from file...', bold=True)
+        click.secho('从文件运行命令...', bold=True)
         for command in file_commands.readlines():
 
             command = command.strip()
@@ -157,7 +157,7 @@ def start(plugin_folder: str, quiet: bool, startup_command: str, file_commands, 
                 continue
 
             # run the command using the instantiated repl
-            click.secho(f'Running: \'{command}\':\n', dim=True)
+            click.secho(f'运行: \'{command}\':\n', dim=True)
             repl.run_command(command)
 
     warn_about_older_operating_systems()

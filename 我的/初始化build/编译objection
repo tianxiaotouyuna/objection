@@ -1,0 +1,1 @@
+pip install . && cd objection && pip install .

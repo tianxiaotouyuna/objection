@@ -158,7 +158,7 @@ class Repl(object):
         token_matches, exec_method = self._find_command_exec_method(tokens)
 
         if exec_method is None:
-            click.secho('Unknown or ambiguous command: `{0}`. Try `help {0}`.'.format(document), fg='yellow')
+            click.secho('未知或不明确的命令。: `{0}`. 尝试 `help {0}`.'.format(document), fg='yellow')
             return
 
         # strip the command matching tokens and leave
@@ -329,7 +329,7 @@ class Repl(object):
 
         if not quiet:
             click.secho(banner, bold=True)
-            click.secho('[tab] for command suggestions', fg='white', dim=True)
+            click.secho('[tab] 用于命令建议', fg='white', dim=True)
 
         # the main application loop is here, reading inputs provided by
         # prompt_toolkit and sending it off the the needed handlers

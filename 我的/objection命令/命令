@@ -1,0 +1,10 @@
+objection --gadget Tiktok explore 
+//启动进入后
+ios hooking search methods XXX  搜索函数
+ios hooking search classes XXX  搜索类
+ios hooking watch class TTHttpRequestChromium   跟踪类
+7356143387005372166
+
+
+
+

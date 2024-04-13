@@ -1,10 +1,9 @@
 class StateConnection(object):
-    """ A class controlling the connection state of a device. """
+    """ 一个控制设备连接状态的类。 """
 
     def __init__(self) -> None:
         """
-            Init a new connection state, defaulting to a USB
-            connection.
+           初始化一个新的连接状态，默认为USB连接。
         """
 
         self.network = False
@@ -25,7 +24,7 @@ class StateConnection(object):
 
     def use_usb(self) -> None:
         """
-            Sets the values required to have a USB connection.
+            设置所需的值以建立USB连接。
 
             :return:
         """
@@ -35,7 +34,7 @@ class StateConnection(object):
 
     def use_network(self) -> None:
         """
-            Sets the values required to have a Network connection.
+             设置需要建立网络连接的值。
 
             :return:
         """
@@ -45,27 +44,27 @@ class StateConnection(object):
 
     def get_comms_type(self) -> int:
         """
-            Returns the currently configured connection type.
+            返回当前配置的连接类型。
 
             :return:
         """
 
     def get_api(self):
         """
-            Return a Frida RPC API session
-
+            返回当前配置的连接类型。
+            
             :return:
         """
 
         if not self.agent:
-            raise Exception('No session available to get API')
+            raise Exception('No session available to get API\n没有可用的会话来获取API。')
 
         return self.agent.exports()
 
     def set_agent(self, agent):
         """
-            Sets the active agent to use for communications.
-
+            设置用于通信的活动代理。
+            
             :param agent:
             :return:
         """
@@ -75,7 +74,7 @@ class StateConnection(object):
     def get_agent(self):
 
         if not self.agent:
-            raise Exception('No Agent available')
+            raise Exception('没有可用的agent代理。')
 
         return self.agent
 

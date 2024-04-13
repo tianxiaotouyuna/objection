@@ -127,22 +127,22 @@ class Agent(object):
     def __init__(self, config: AgentConfig):
         """ initialises the agent class """
 
-        self.agent_path = Path(__file__).parent.parent / 'agent.js'
+        self.agent_path = Path(__file__).parent.parent / 'aaaagent.js'
         if not self.agent_path.exists():
-            raise Exception(f'Unable to locate Objection agent sources at: {self.agent_path}. '
-                            'If this is a development install, check the wiki for more '
-                            'information on building the agent.')
-        debug_print('Agent path is: {path}'.format(path=self.agent_path))
+            raise Exception(f'无法在以下位置找到Objection Agent代理源： {self.agent_path}. '
+                            '如果这是一个开发安装，请查阅维基以获取更多信息 '
+                            '关于构建agent代理的信息。')
+        debug_print('Agent 代理路径是： {path}'.format(path=self.agent_path))
 
         self.config = config
-        debug_print(f'agent config: {self.config}')
+        debug_print(f'agent 代理配置是: {self.config}')
         self.handlers = OutputHandlers()
 
         atexit.register(self.teardown)
 
     def _get_agent_source(self) -> str:
         """
-            Loads the frida-compiled agent from disk.
+            从磁盘加载编译好的frida的代理 agent
 
             :return:
         """
@@ -154,7 +154,7 @@ class Agent(object):
 
     def set_device(self):
         """
-            Set's the target device to work with.
+            设置目标设备以进行工作。
 
             :return:
         """
@@ -189,9 +189,7 @@ class Agent(object):
 
     def set_target_pid(self):
         """
-            Set's the PID we should attach to. This method will spawn the
-            target if needed. The resumed value is also toggled here.
-
+            设置我们应该附加到的PID。如果需要，此方法将重新打开目标APP。
             Defaults:
                 resumed: bool = True
 
@@ -199,13 +197,13 @@ class Agent(object):
         """
 
         if (self.config.name is None) and (not self.config.foremost):
-            raise Exception('Need a target name to spawn/attach to')
+            raise Exception('需要一个目标名称来 spawn或者attach')
 
         if self.config.foremost:
             try:
                 app = self.device.get_frontmost_application()
             except Exception as e:
-                raise Exception(f'Could not get foremost application on {self.device.name}: {e}')
+                raise Exception(f'无法获取运行中的应用程序 {self.device.name}: {e}')
 
             if app is None:
                 raise Exception(f'No foremost application on {self.device.name}')

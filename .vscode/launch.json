@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "注入TikTok",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "objection.console.cli",
+            "console": "integratedTerminal",
+            "args": [
+                "-n",
+                "TikTok",
+                "start"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -56,7 +56,7 @@ class TestRepl(unittest.TestCase):
         with capture(self.repl.run_command, 'android wont do this') as o:
             output = o
 
-        expected_outut = 'Unknown or ambiguous command: `android wont do this`. Try `help android wont do this`.\n'
+        expected_outut = '未知或不明确的命令。: `android wont do this`. 尝试 `help android wont do this`.\n'
         self.assertEqual(output, expected_outut)
 
     def test_is_able_to_find_an_executable_method_to_run_with_tokens_passed(self):

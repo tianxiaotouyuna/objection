@@ -709,10 +709,10 @@ COMMANDS = {
                 }
             },
             'sslpinning': {
-                'meta': 'Work with iOS SSL pinning',
+                'meta': '使用SSL证书固定 Work with iOS SSL pinning',
                 'commands': {
                     'disable': {
-                        'meta': 'Attempt to disable SSL pinning in various iOS libraries/classes',
+                        'meta': '尝试在各种情况下禁用SSL pinning。 iOS libraries/classes',
                         'flags': ['--quiet'],
                         'exec': ios_pinning.ios_disable
                     }

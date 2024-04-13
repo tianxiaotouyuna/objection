@@ -1,10 +1,10 @@
-#!/Users/mac/Desktop/objection/myenv/bin/python3
-# EASY-INSTALL-ENTRY-SCRIPT: 'objection==1.11.0','console_scripts','objection'
+#!/Users/apple/Desktop/objection/myenv/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'objection','console_scripts','objection'
 import re
 import sys
 
 # for compatibility with easy_install; see #2198
-__requires__ = 'objection==1.11.0'
+__requires__ = 'objection'
 
 try:
     from importlib.metadata import distribution
@@ -30,4 +30,4 @@ globals().setdefault('load_entry_point', importlib_load_entry_point)
 
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
-    sys.exit(load_entry_point('objection==1.11.0', 'console_scripts', 'objection')())
+    sys.exit(load_entry_point('objection', 'console_scripts', 'objection')())
