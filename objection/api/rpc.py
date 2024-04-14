@@ -9,11 +9,9 @@ bp = Blueprint('rpc', __name__, url_prefix='/rpc')
 @bp.route('/invoke/<string:method>', methods=('GET', 'POST'))
 def invoke(method):
     """
-        Bridge a call to the Frida RPC. Endpoints may be sourced from
-        the agent's RPC exports.
+        将呼叫桥接到Frida RPC。端点可以来自代理的RPC导出。
 
-        Responses are JSON encoded by default, but can be raw by adding
-        ?json=false as a query string parameter.
+响应默认为JSON编码，但通过添加?json=false作为查询字符串参数，可以是原始格式
 
         :param method:
         :return:
