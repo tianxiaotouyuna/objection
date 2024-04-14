@@ -8,9 +8,7 @@
             "module": "objection.console.cli",
             "console": "integratedTerminal",
             "args": [
-                "-n",
-                "TikTok",
-                "start"
+                "-n","TikTok","start"
             ],
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"

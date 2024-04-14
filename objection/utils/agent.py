@@ -127,7 +127,7 @@ class Agent(object):
     def __init__(self, config: AgentConfig):
         """ initialises the agent class """
 
-        self.agent_path = Path(__file__).parent.parent / 'aaaagent.js'
+        self.agent_path = Path(__file__).parent.parent / 'agent.js'
         if not self.agent_path.exists():
             raise Exception(f'无法在以下位置找到Objection Agent代理源： {self.agent_path}. '
                             '如果这是一个开发安装，请查阅维基以获取更多信息 '
@@ -180,7 +180,7 @@ class Agent(object):
 
         # surely we have a device by now?
         if self.device is None:
-            raise Exception('Unable to find a device')
+            raise Exception('未发现链接的设备')
 
         self.device.on('output', self.handlers.device_output)
         self.device.on('lost', self.handlers.device_lost)
