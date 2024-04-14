@@ -1,0 +1,12 @@
+sh
+插入代码
+复制代码
+chmod 755 /usr/sbin/frida-server
+运行frida-server：直接在终端中运行frida-server：
+
+
+        
+sh
+插入代码
+复制代码
+/usr/sbin/frida-server &

@@ -1,0 +1,6 @@
+自己安装的
+本地仓库：/usr/local/lib/python3.10/site-packages
+bin目录:/usr/local/opt/python@3.10/bin/python3.10
+系统的
+本地仓库：/Library/Python/3.9/site-packages
+bin目录:/usr/bin/python3.9

@@ -1,0 +1,96 @@
+
+
+alias python='/usr/local/opt/python@3.10/bin/python3.10'
+
+
+
+
+
+
+
+mac上有2个版本python。系统自带的python3.9.6和自己brew install安装的pthon3.10.0
+怎么设置，输入python就运行pthon3.10.0
+04月13日 21:14 会话ID:(3730150)
+
+
+
+
+
+在macOS上，当你通过Homebrew安装了一个新的Python版本时，通常情况下Homebrew会将它安装到一个独立的目录中，并且不会覆盖系统自带的Python版本。为了使用Homebrew安装的Python版本，你需要调整你的shell配置文件来改变python命令的指向。默认情况下，Homebrew会将Python安装在/usr/local/bin目录下，而macOS系统会优先使用/usr/bin目录下的Python版本。
+
+按照以下步骤来设置默认的python命令指向你通过Homebrew安装的Python 3.10.0版本：
+
+打开终端。
+
+找出Python 3.10.0的路径。你可以使用以下命令来找出Homebrew安装的Python版本的路径:
+
+
+        
+sh
+插入代码
+复制代码
+brew info python
+或者找出python3的可执行文件路径:
+
+
+        
+sh
+插入代码
+复制代码
+which python3
+根据你使用的shell（比如Bash或者Zsh），编辑相应的配置文件（.bash_profile, .bashrc, .zshrc等）。例如，如果你使用的是Bash，你可以使用nano或者你喜欢的任何文本编辑器来编辑.bash_profile或.bashrc文件:
+
+
+        
+sh
+插入代码
+复制代码
+nano ~/.bash_profile
+如果你使用的是Zsh，你可以编辑.zshrc文件:
+
+
+        
+sh
+插入代码
+复制代码
+nano ~/.zshrc
+在打开的配置文件中，添加一个别名来将python命令指向Python 3.10.0的路径。你需要将<path-to-python3.10>替换为实际的Python 3.10.0可执行文件的路径（这通常是/usr/local/bin/python3）:
+
+
+        
+sh
+插入代码
+复制代码
+alias python='/usr/local/bin/python3'
+保存并关闭配置文件。
+
+重新加载配置文件或者重新启动终端以使更改生效。如果你是在.bash_profile或.bashrc中添加了别名，你可以通过以下命令重新加载配置:
+
+
+        
+sh
+插入代码
+复制代码
+source ~/.bash_profile
+或者对于.zshrc:
+
+
+        
+sh
+插入代码
+复制代码
+source ~/.zshrc
+验证更改。输入python --version应该显示Python 3.10.0。
+
+请注意，这将只是为当前用户设置别名。如果你想要为系统的所有用户更改默认的Python版本，你需要更深入地修改系统配置，这通常不推荐，因为它可能会影响系统自带的脚本和程序。
+
+
+
+
+
+
+
+
+
+
+

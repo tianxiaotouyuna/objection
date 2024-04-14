@@ -2,13 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "注入TikTok",
+            "name": "注入APP",
             "type": "debugpy",
             "request": "launch",
             "module": "objection.console.cli",
             "console": "integratedTerminal",
             "args": [
                 "-n","TikTok","start"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "注入PC",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "objection.console.cli",
+            "console": "integratedTerminal",
+            "args": [
+                "--desktop","-n","31484","start"
             ],
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"

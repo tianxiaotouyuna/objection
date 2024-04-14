@@ -1,0 +1,25 @@
+pip() {
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        # 如果在虚拟环境中，检查虚拟环境是否有 Python 安装
+        if command -v python &> /dev/null; then
+            # 在虚拟环境中使用该环境的 pip
+            command pip "$@"
+        else
+            # 在虚拟环境中没有 Python 安装，使用真实环境的 pip
+            /usr/local/opt/python@3.10/bin/pip3.10 "$@"
+        fi
+    else
+        # 不在虚拟环境中，使用指定版本的 pip
+        /usr/local/opt/python@3.10/bin/pip3.10 "$@"
+    fi
+}
+
+
+
+
+
+
+
+
+
+source ./zshrc

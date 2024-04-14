@@ -324,7 +324,7 @@ class Repl(object):
       |___|(object)inject(ion) v{0}
 
      Runtime Mobile Exploration
-        by: @leonjza from @sensepost123
+        by: @tianxiao from @github
 """).format(__version__)
 
         if not quiet:

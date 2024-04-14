@@ -1,0 +1,6 @@
+git remote set upstream 原仓库地址
+git checkout 新功能本地址分支AAA
+git push
+git fetch upstream
+git pull upstream pull/664/head:AAA
+git pull --no-rebase upstream pull/664/head
