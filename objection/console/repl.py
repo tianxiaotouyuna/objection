@@ -167,7 +167,7 @@ class Repl(object):
 
         # run the method for the command itself!
         exec_method(arguments)
-
+    
         app_state.add_command_to_history(command=document)
 
     def _find_command_exec_method(self, tokens: list) -> tuple:

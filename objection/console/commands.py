@@ -48,110 +48,110 @@ from ..utils.helpers import list_current_jobs
 COMMANDS = {
 
     'plugin': {
-        'meta': '管理插件',
+        'meta': 'Work with plugins',
         'commands': {
             'load': {
-                'meta': '加载插件',
+                'meta': 'Load a plugin',
                 'exec': plugin_manager.load_plugin
             }
         }
     },
 
     '!': {
-        'meta': '执行操作系统命令',
+        'meta': 'Execute an Operating System command',
         'exec': None,  # handled in the Repl class itself
     },
 
     'reconnect': {
-        'meta': '重新连接当前设备',
+        'meta': 'Reconnect to the current device',
         'exec': None,  # handled in the Repl class itself
     },
 
     'resume': {
-        'meta': '恢复附加的进程',
+        'meta': 'Resume the attached process',
         'exec': None
     },
 
     'import': {
-        'meta': '从完整路径导入 fridascript 并运行它',
+        'meta': 'Import fridascript from a full path and run it',
         'exec': frida_commands.load_background
     },
 
     'ping': {
-        'meta': 'ping 注入的代理',
+        'meta': 'Ping the injected agent',
         'exec': frida_commands.ping
     },
 
-    # 文件管理器命令
+    # file manager commands
 
     'cd': {
-        'meta': '更改当前工作目录',
+        'meta': 'Change the current working directory',
         'dynamic': filemanager.list_folders_in_current_fm_directory,
         'exec': filemanager.cd
     },
 
     'commands': {
-        'meta': '管理当前会话中运行的命令',
+        'meta': 'Work with commands run in the current session',
         'commands': {
             'history': {
-                'meta': '列出当前会话中运行的所有唯一命令',
+                'meta': 'List all unique commands that have run for this session',
                 'exec': command_history.history,
             },
             'save': {
-                'meta': '将当前会话中运行的所有唯一命令保存到文件中',
+                'meta': 'Save all unique commands that have run in this session to a file',
                 'exec': command_history.save
             },
             'clear': {
-                'meta': '清除当前会话的命令历史记录',
+                'meta': 'Clear the current sessions command history',
                 'exec': command_history.clear
             }
         }
     },
 
     'ls': {
-        'meta': '列出当前工作目录中的文件',
+        'meta': 'List files in the current working directory',
         'dynamic': filemanager.list_folders_in_current_fm_directory,
         'exec': filemanager.ls,
     },
 
     'pwd': {
-        'meta': '打印设备上的当前工作目录',
+        'meta': 'Print the current working directory on the device',
         'exec': filemanager.pwd_print,
     },
 
     'file': {
-        'meta': '管理远程文件系统上的文件',
+        'meta': 'Work with files on the remote filesystem',
         'commands': {
             'cat': {
-                'meta': '打印文件的内容',
+                'meta': 'Print a files contents',
                 'dynamic': filemanager.list_files_in_current_fm_directory,
                 'exec': filemanager.cat
             },
             'upload': {
-                'meta': '上传文件',
+                'meta': 'Upload a file',
                 'exec': filemanager.upload
             },
             'download': {
-                'meta': '下载文件',
+                'meta': 'Download a file',
                 'dynamic': filemanager.list_files_in_current_fm_directory,
                 'exec': filemanager.download
             },
 
-            # http 文件服务器
+            # http file server
 
             'http': {
-                'meta': '管理设备上的 http 文件服务器',
+                'meta': 'Work with an on device HTTP file server',
                 'commands': {
                     'start': {
-                        'meta': '在当前工作目录启动 http 服务器',
+                        'meta': 'Start\'s an HTTP server in the current working directory',
                         'exec': http.start
                     },
                     'status': {
-                        'meta': '获取 http 服务器的状态',
+                        'meta': 'Get the status of the HTTP server',
                         'exec': http.status
                     },
                     'stop': {
-                        'meta': '停止运行的 http 服务器',
+                        'meta': 'Stop\'s a running HTTP server',
                         'exec': http.stop
                     }
                 }
@@ -160,59 +160,59 @@ COMMANDS = {
     },
 
     'rm': {
-        'meta': '删除远程文件系统中的文件',
+        'meta': 'Delete files from the remote filesystem',
         'dynamic': filemanager.list_files_in_current_fm_directory,
         'exec': filemanager.rm
     },
 
-    # 设备和环境信息命令
+    # device and env info commands
 
     'env': {
-        'meta': '打印有关环境的信息',
+        'meta': 'Print information about the environment',
         'exec': device.get_environment
     },
 
     'frida': {
-        'meta': '获取有关 Frida 环境的信息',
+        'meta': 'Get information about the Frida environment',
         'exec': frida_commands.frida_environment
     },
 
     'evaluate': {
-        'meta': '在代理中评估 JavaScript',
+        'meta': 'Evaluate JavaScript within the agent',
         'exec': custom.evaluate
     },
 
-    # 内存命令
+    # memory commands
 
     'memory': {
-        'meta': '管理当前进程的内存',
+        'meta': 'Work with the current processes memory',
         'commands': {
             'dump': {
-                'meta': '转储进程内存的各个部分',
+                'meta': 'Commands to dump parts of the processes memory',
                 'commands': {
                     'all': {
-                        'meta': '转储整个当前进程的内存',
+                        'meta': 'Dump the entire memory of the current process',
                         'exec': memory.dump_all
                     },
 
                     'from_base': {
-                        'meta': '从基础地址转储 (x) 字节的内存到文件',
+                        'meta': 'Dump (x) bytes of memory from a base address to file',
                         'exec': memory.dump_from_base
                     }
                 },
             },
 
             'list': {
-                'meta': '列出与当前进程相关的内存信息',
+                'meta': 'List memory related information about the current process',
                 'commands': {
                     'modules': {
-                        'meta': '列出当前进程加载的模块',
+                        'meta': 'List loaded modules in the current process',
                         'flags': ['--json'],
                         'exec': memory.list_modules
                     },
 
                     'exports': {
-                        'meta': '列出模块的导出',
+                        'meta': 'List the exports of a module',
                         'flags': ['--json'],
                         'exec': memory.list_exports
                     }
@@ -220,148 +220,149 @@ COMMANDS = {
             },
 
             'search': {
-                'meta': '在应用程序内存中搜索模式',
+                'meta': 'Search for pattern in the applications memory',
                 'flags': ['--string', '--offsets-only'],
                 'exec': memory.find_pattern
             },
 
             'write': {
-                'meta': '将原始字节写入内存地址。请谨慎使用！',
+                'meta': 'Write raw bytes to a memory address. Use with caution!',
                 'flags': ['--string'],
                 'exec': memory.write
             }
         },
     },
 
-    # sqlite 命令
+    # sqlite commands
 
     'sqlite': {
-        'meta': '管理 SQLite 数据库',
+        'meta': 'Work with SQLite databases',
         'commands': {
             'connect': {
-                'meta': '连接到 SQLite 数据库文件',
+                'meta': 'Connect to a SQLite database file',
                 'flags': ['--sync'],
                 'dynamic': filemanager.list_files_in_current_fm_directory,
                 'exec': sqlite.connect
-            }
+            },
         }
     },
 
-    # 作业命令
+    # jobs commands
 
     'jobs': {
-        'meta': '管理 objection 作业',
+        'meta': 'Work with objection jobs',
         'commands': {
             'list': {
-                'meta': '列出所有当前作业',
+                'meta': 'List all of the current jobs',
                 'exec': jobs.show
             },
             'kill': {
-                'meta': '终止作业。这将卸载脚本',
+                'meta': 'Kill a job. This unloads the script',
                 'dynamic': list_current_jobs,
                 'exec': jobs.kill
             }
         }
     },
 
-    # 通用用户界面命令
+    # generic ui commands
 
     'ui': {
-        'meta': '通用用户界面命令',
+        'meta': 'Generic user interface commands',
         'commands': {
             'alert': {
-                'meta': '显示警报消息，可选地指定要显示的消息。 (目前会使 iOS 崩溃)',
+                'meta': 'Show an alert message, optionally specifying the message to show. (Currently crashes iOS)',
                 'exec': ui.alert
             }
         }
     },
+
     # android commands
 
     'android': {
-        'meta': 'Android 相关命令',
+        'meta': 'Commands specific to Android',
         'commands': {
             'deoptimize': {
-                'meta': '强制虚拟机在解释器中执行所有代码',
+                'meta': 'Force the VM to execute everything in the interpreter',
                 'exec': general.deoptimise
             },
             'shell_exec': {
-                'meta': '执行 shell 命令',
+                'meta': 'Execute a shell command',
                 'exec': command.execute
             },
             'hooking': {
-                'meta': '用于在 Android 上挂钩方法的命令',
+                'meta': 'Commands used for hooking methods in Android',
                 'commands': {
                     'list': {
-                        'meta': '列出各种信息',
+                        'meta': 'Lists various bits of information',
                         'commands': {
                             'classes': {
-                                'meta': '列出当前加载的类',
+                                'meta': 'List the currently loaded classes',
                                 'exec': android_hooking.show_android_classes
                             },
                             'class_methods': {
-                                'meta': '列出类上可用的方法',
+                                'meta': 'List the methods available on a class',
                                 'exec': android_hooking.show_android_class_methods
                             },
                             'class_loaders': {
-                                'meta': '列出已注册的类加载器',
+                                'meta': 'List the registered class loaders',
                                 'exec': android_hooking.show_android_class_loaders
                             },
                             'activities': {
-                                'meta': '列出已注册的 activities',
+                                'meta': 'List the registered Activities',
                                 'exec': android_hooking.show_registered_activities
                             },
                             'receivers': {
-                                'meta': '列出已注册的 BroadcastReceivers',
+                                'meta': 'List the registered BroadcastReceivers',
                                 'exec': android_hooking.show_registered_broadcast_receivers
                             },
                             'services': {
-                                'meta': '列出已注册的 Services',
+                                'meta': 'List the registered Services',
                                 'exec': android_hooking.show_registered_services
                             },
                         }
                     },
                     'watch': {
-                        'meta': '监听 Android Java 调用',
+                        'meta': 'Watch for Android Java invocations',
                         'exec': android_hooking.watch,
                         'flags': ['--dump-args', '--dump-backtrace', '--dump-return']
                     },
                     'set': {
-                        'meta': '设置各种值',
+                        'meta': 'Set various values',
                         'commands': {
                             'return_value': {
-                                'meta': '设置方法的返回值。仅支持布尔返回值。',
+                                'meta': 'Set a methods return value. Supports only boolean returns.',
                                 'exec': android_hooking.set_method_return_value,
                                 'flags': ['--dump-args', '--dump-return', '--dump-backtrace']
                             }
                         }
                     },
                     'get': {
-                        'meta': '获取各种值',
+                        'meta': 'Get various values',
                         'commands': {
                             'current_activity': {
-                                'meta': '获取当前前台 activity',
+                                'meta': 'Get the currently foregrounded activity',
                                 'exec': android_hooking.get_current_activity
                             }
                         }
                     },
                     'search': {
-                        'meta': '搜索各类类和方法',
+                        'meta': 'Search for various classes and or methods',
                         'exec': android_hooking.search,
                         'flags': ['--json', '--only-classes']
                     },
                     'notify': {
-                        'meta': '当类可用时通知',
+                        'meta': 'Notify when a class becomes available',
                         'exec': android_hooking.notify
                     },
                     'generate': {
-                        'meta': '为 Android 生成 Frida 钩子',
+                        'meta': 'Generate Frida hooks for Android',
                         'commands': {
                             'class': {
-                                'meta': '通用类钩子管理器',
+                                'meta': 'A generic hook manager for Classes',
                                 'exec': android_generate.clazz
                             },
                             'simple': {
-                                'meta': '为每个类方法生成简单钩子',
+                                'meta': 'Simple hooks for each Class method',
                                 'exec': android_generate.simple
                             }
                         }
@@ -369,380 +370,588 @@ COMMANDS = {
                 },
             },
             'heap': {
-                'meta': '用于操作 Android 堆的命令',
+                'meta': 'Commands to work with the Android Heap',
                 'commands': {
                     'search': {
-                        'meta': '搜索当前 Android 堆中的信息',
+                        'meta': 'Search for information about the current Android heap',
                         'commands': {
                             'instances': {
-                                'meta': '搜索特定类的实例',
+                                'meta': 'Search for live instances of a particular class',
                                 'exec': android_heap.instances
 
                             }
                         }
                     },
                     'print': {
-                        'meta': '打印 Android 堆上对象的信息',
+                        'meta': 'Print information about objects on the Android heap',
                         'commands': {
                             'fields': {
-                                'meta': '打印 Java 对象实例字段',
+                                'meta': 'Print instance fields for a Java object handle',
                                 'exec': android_heap.fields
                             },
                             'methods': {
-                                'meta': '打印 Android 句柄的实例方法',
+                                'meta': 'Print instance methods for an Android handle',
                                 'flags': ['--without-arguments'],
                                 'exec': android_heap.methods
                             }
                         }
                     },
                     'execute': {
-                        'meta': '在 Java 类句柄上执行方法',
+                        'meta': 'Execute methods on Java class handles',
                         'flags': ['--return-string'],
                         'exec': android_heap.execute
                     },
                     'evaluate': {
-                        'meta': '在 Java 类句柄上执行 JavaScript',
+                        'meta': 'Evaluate JavaScript on Java class handle',
                         'exec': android_heap.evaluate
                     }
                 }
             },
             'keystore': {
-                'meta': '用于操作 Android KeyStore 的命令',
+                'meta': 'Commands to work with the Android KeyStore',
                 'commands': {
                     'list': {
-                        'meta': '列出 Android KeyStore 中的条目',
+                        'meta': 'Lists entries in the Android KeyStore',
                         'exec': keystore.entries
                     },
                     'detail': {
-                        'meta': '列出 Android KeyStore 中的所有条目详细信息',
+                        'meta': 'Lists details for all items in the Android KeyStore',
                         'flags': ['--json'],
                         'exec': keystore.detail
                     },
                     'clear': {
-                        'meta': '清除 Android KeyStore',
+                        'meta': 'Clears the Android KeyStore',
                         'exec': keystore.clear
                     },
                     'watch': {
-                        'meta': '监听 Android KeyStore 的使用情况',
+                        'meta': 'Watches usage of the Android keystore',
                         'exec': keystore.watch
                     }
                 }
             },
             'clipboard': {
-                'meta': '用于操作 Android 剪贴板的命令',
+                'meta': 'Work with the Android Clipboard',
                 'commands': {
                     'monitor': {
-                        'meta': '监听 Android 剪贴板',
+                        'meta': 'Monitor the Android Clipboard',
                         'exec': clipboard.monitor
                     }
                 }
             },
             'intent': {
-                'meta': '用于操作 Android intent 的命令',
+                'meta': 'Commands to work with Android intents',
                 'commands': {
                     'launch_activity': {
-                        'meta': '使用 intent 启动 Activity 类',
+                        'meta': 'Launch an Activity class using an Intent',
                         'exec': intents.launch_activity
                     },
                     'launch_service': {
-                        'meta': '使用 intent 启动 Service 类',
+                        'meta': 'Launch a Service class using an Intent',
                         'exec': intents.launch_service
                     }
                 }
             },
             'root': {
-                'meta': '用于操作 Android root 检测的命令',
+                'meta': 'Commands to work with Android root detection',
                 'commands': {
                     'disable': {
-                        'meta': '尝试禁用 root 检测',
+                        'meta': 'Attempt to disable root detection',
                         'exec': root.disable
                     },
                     'simulate': {
-                        'meta': '尝试模拟 root 环境',
+                        'meta': 'Attempt to simulate a rooted environment',
                         'exec': root.simulate
                     }
                 }
             },
             'sslpinning': {
-                'meta': '用于操作 Android SSL pinning 的命令',
+                'meta': 'Work with Android SSL pinning',
                 'commands': {
                     'disable': {
-                        'meta': '尝试禁用各种 Java 库/类中的 SSL pinning',
+                        'meta': 'Attempt to disable SSL pinning in various Java libraries/classes',
                         'flags': ['--quiet'],
                         'exec': android_pinning.android_disable
                     }
                 }
             },
             'proxy': {
-                'meta': '用于为应用程序设置代理的命令',
+                'meta': 'Commands to work with a proxy for the application',
                 'commands': {
                     'set': {
-                        'meta': '为应用程序设置代理',
+                        'meta': 'Set a proxy for the application',
                         'exec': android_proxy.android_proxy_set
                     }
                 }
             },
             'ui': {
-                'meta': 'Android 用户界面命令',
+                'meta': 'Android user interface commands',
                 'commands': {
                     'screenshot': {
-                        'meta': '对当前 Activity 进行截图',
+                        'meta': 'Screenshot the current Activity',
                         'exec': ui.android_screenshot
                     },
                     'FLAG_SECURE': {
-                        'meta': '控制当前 Activity 的 FLAG_SECURE 标志',
+                        'meta': 'Control FLAG_SECURE of the current Activity',
                         'exec': ui.android_flag_secure
                     },
                 }
             },
         },
     },
-
     # ios commands
     'ios': {
-        'meta': 'iOS 相关的命令',
+        'meta': 'Commands specific to iOS',
         'commands': {
             'info': {
-                'meta': '获取 iOS 和应用程序相关的信息',
+                'meta': 'Get iOS and application related information',
                 'commands': {
                     'binary': {
-                        'meta': '获取应用程序二进制和动态库的信息',
-                        'exec': 'binary.info'
+                        'meta': 'Get information about application binaries and dylibs',
+                        'exec': binary.info
                     }
                 }
             },
             'keychain': {
-                'meta': '使用 iOS 钥匙串',
+                'meta': 'Work with the iOS keychain',
                 'commands': {
                     'dump': {
-                        'meta': '为当前应用的授权组转储钥匙串',
+                        'meta': 'Dump the keychain for the current app\'s entitlement group',
                         'flags': ['--json', '--smart'],
-                        'exec': 'keychain.dump'
+                        'exec': keychain.dump
                     },
                     'dump_raw': {
-                        'meta': '转储原始的、未处理的钥匙串条目（高级）',
-                        'exec': 'keychain.dump_raw'
+                        'meta': 'Dump raw, unprocessed keychain entries (advanced)',
+                        'exec': keychain.dump_raw
                     },
                     'clear': {
-                        'meta': '删除当前应用的授权组的所有钥匙串条目',
-                        'exec': 'keychain.clear'
+                        'meta': 'Delete all keychain entries for the current app\'s entitlement group',
+                        'exec': keychain.clear
                     },
                     'add': {
-                        'meta': '向 iOS 钥匙串添加条目',
+                        'meta': 'Add an entry to the iOS keychain',
                         'flags': ['--account', '--service', '--data'],
-                        'exec': 'keychain.add'
+                        'exec': keychain.add
                     }
                 }
             },
             'plist': {
-                'meta': '使用 iOS Plist',
+                'meta': 'Work with iOS Plists',
                 'commands': {
                     'cat': {
-                        'meta': '猫一个 Plist',
-                        'dynamic': 'filemanager.list_files_in_current_fm_directory',
-                        'exec': 'plist.cat'
+                        'meta': 'Cat a plist',
+                        'dynamic': filemanager.list_files_in_current_fm_directory,
+                        'exec': plist.cat
                     }
                 }
             },
             'bundles': {
-                'meta': '使用 iOS 包',
+                'meta': 'Work with iOS Bundles',
                 'commands': {
                     'list_frameworks': {
-                        'meta': '列出应用程序的所有代表框架的包',
+                        'meta': 'Lists all of the application\'s bundles that represent frameworks',
                         'flags': ['--include-apple-frameworks', '--full-path'],
-                        'exec': 'bundles.show_frameworks'
+                        'exec': bundles.show_frameworks
                     },
                     'list_bundles': {
-                        'meta': '列出应用程序的所有非框架包',
+                        'meta': 'Lists all of the application\'s non framework bundles',
                         'flags': ['--full-path'],
-                        'exec': 'bundles.show_bundles'
+                        'exec': bundles.show_bundles
                     }
                 }
             },
             'nsuserdefaults': {
-                'meta': '使用 NSUserDefaults',
+                'meta': 'Work with NSUserDefaults',
                 'commands': {
                     'get': {
-                        'meta': '获取所有条目',
-                        'exec': 'nsuserdefaults.get'
+                        'meta': 'Get all of the entries',
+                        'exec': nsuserdefaults.get
                     }
                 }
             },
             'nsurlcredentialstorage': {
-                'meta': '使用共享的 NSURLCredentialStorage',
+                'meta': 'Work with the shared NSURLCredentialStorage',
                 'commands': {
                     'dump': {
-                        'meta': '转储共享的 NSURLCredentialStorage 中的所有凭证',
-                        'exec': 'nsurlcredentialstorage.dump'
+                        'meta': 'Dump all of the credentials in the shared NSURLCredentialStorage',
+                        'exec': nsurlcredentialstorage.dump
                     }
                 }
             },
             'cookies': {
-                'meta': '使用共享的 cookie',
+                'meta': 'Work with shared cookies',
                 'commands': {
                     'get': {
-                        'meta': '获取当前应用的共享 cookie',
+                        'meta': 'Get the current apps shared cookies',
                         'flags': ['--json'],
-                        'exec': 'cookies.get'
+                        'exec': cookies.get
                     }
                 }
             },
             'ui': {
-                'meta': 'iOS 用户界面命令',
+                'meta': 'iOS user interface commands',
                 'commands': {
                     'alert': {
-                        'meta': ('显示一个警报消息，可选择显示特定的消息。（目前会使 iOS 崩溃）'),
-                        'exec': 'ui.alert'
+                        'meta': ('Show an alert message, optionally specifying the message to'
+                                 'show. (Currently crashes iOS)'),
+                        'exec': ui.alert
                     },
                     'dump': {
-                        'meta': '转储序列化的 UI',
-                        'exec': 'ui.dump_ios_ui'
+                        'meta': 'Dump the serialized UI',
+                        'exec': ui.dump_ios_ui
                     },
-                    'creenshot': {
-                        'meta': '截取当前 UIView 的屏幕截图',
-                        'exec': 'ui.ios_screenshot'
+                    'screenshot': {
+                        'meta': 'Screenshot the current UIView',
+                        'exec': ui.ios_screenshot
                     },
                     'biometrics_bypass': {
-                        'meta': '钩住 iOS 生物识别 LAContext 并响应成功的身份验证',
-                        'exec': 'ui.bypass_touchid'
+                        'meta': 'Hook the iOS Biometrics LAContext and respond with successful auth',
+                        'exec': ui.bypass_touchid
                     }
                 }
             },
             'heap': {
-                'meta': '用于操作 iOS 堆的命令',
+                'meta': 'Commands to work with the iOS heap',
                 'commands': {
                     'print': {
-                        'meta': '打印有关 iOS 堆上对象的信息',
+                        'meta': 'Print information about objects on the iOS heap',
                         'commands': {
                             'ivars': {
-                                'meta': '打印 Objective-C 对象的实例变量',
+                                'meta': 'Print instance variables for an Objective-C object',
                                 'flags': ['--to-utf8'],
-                                'exec': 'ios_heap.ivars'
+                                'exec': ios_heap.ivars
                             },
                             'methods': {
-                                'meta': '打印 Objective-C 对象的实例方法',
+                                'meta': 'Print instance methods for an Objective-C object',
                                 'flags': ['--without-arguments'],
-                                'exec': 'ios_heap.methods'
+                                'exec': ios_heap.methods
                             }
                         }
                     },
                     'search': {
-                        'meta': '搜索当前 iOS 堆上的信息',
+                        'meta': 'Search for information about the current iOS heap',
                         'commands': {
                             'instances': {
-                                'meta': '搜索特定类的活动实例',
-                                'exec': 'ios_heap.instances'
+                                'meta': 'Search for live instances of a particular class',
+                                'exec': ios_heap.instances
                             }
                         }
                     },
                     'execute': {
-                        'meta': '在 iOS 堆上的对象上执行方法',
+                        'meta': 'Execute methods on objects on the iOS heap',
                         'flags': ['--return-string'],
-                        'exec': 'ios_heap.execute'
+                        'exec': ios_heap.execute
                     },
                     'evaluate': {
-                        'meta': '在 iOS 堆上的对象上评估 JavaScript',
+                        'meta': 'Evaluate JavaScript on objects on the iOS heap',
                         'flags': ['--inline'],
-                        'exec': 'ios_heap.evaluate'
+                        'exec': ios_heap.evaluate
                     }
                 }
             },
             'hooking': {
-                'meta': '用于在 iOS 中挂钩方法的命令',
+                'meta': 'Commands used for hooking methods in iOS',
                 'commands': {
                     'list': {
-                        'meta': '列出各种信息',
+                        'meta': 'Lists various bits of information',
                         'commands': {
                             'classes': {
-                                'meta': '列出当前应用中的类',
-                                'exec': 'ios_hooking.show_ios_classes'
+                                'meta': 'List classes available in the current application',
+                                'exec': ios_hooking.show_ios_classes
                             },
                             'class_methods': {
-                                'meta': '列出类中的方法',
+                                'meta': 'List the methods in a class',
                                 'flags': ['--include-parents'],
-                                'exec': 'ios_hooking.show_ios_class_methods'
+                                'exec': ios_hooking.show_ios_class_methods
                             }
                         }
                     },
                     'watch': {
-                        'meta': '监视类和方法的调用',
-                        'exec': 'ios_hooking.watch',
-                        'flags': ['--dump-args', '--dump-backtrace', '--dump-return']
+                        'meta': 'Watch invocations of classes and methods',
+                        'exec': ios_hooking.watch,
+                        'flags': ['--dump-args', '--dump-backtrace', '--dump-return'],
                     },
-                    'et': {
-                        'meta': '设置各种值',
+                    'set': {
+                        'meta': 'Set various values',
                         'commands': {
-                            'eturn_value': {
-                                'meta': '设置方法的返回值。仅支持布尔返回',
-                                'exec': 'ios_hooking.set_method_return_value'
+                            'return_value': {
+                                'meta': 'Set a methods return value. Supports only boolean returns',
+                                'exec': ios_hooking.set_method_return_value
                             }
                         }
                     },
                     'search': {
-                        'meta': '搜索各种类和或方法',
-                        'exec': 'ios_hooking.search',
+                        'meta': 'Search for various classes and or methods',
+                        'exec': ios_hooking.search,
                         'flags': ['--json', '--only-classes']
                     },
                     'generate': {
-                        'meta': '为 iOS 生成 Frida 挂钩',
+                        'meta': 'Generate Frida hooks for iOS',
                         'commands': {
                             'class': {
-                                'meta': '类的通用挂钩管理器',
-                                'exec': 'ios_generate.clazz'
+                                'meta': 'A generic hook manager for Classes',
+                                'exec': ios_generate.clazz
                             },
-                            'imple': {
-                                'meta': '为每个类方法的简单挂钩',
-                                'exec': 'ios_generate.simple'
+                            'simple': {
+                                'meta': 'Simple hooks for each Class method',
+                                'exec': ios_generate.simple
                             }
-                        }
+                        },
                     }
                 }
             },
             'pasteboard': {
-                'meta': '使用 iOS 剪贴板',
+                'meta': 'Work with the iOS pasteboard',
                 'commands': {
-                    'onitor': {
-                        'meta': '监视 iOS 剪贴板',
-                        'exec': 'pasteboard.monitor'
+                    'monitor': {
+                        'meta': 'Monitor the iOS pasteboard',
+                        'exec': pasteboard.monitor
                     }
                 }
             },
             'sslpinning': {
-                'meta': '使用 iOS SSL 固定 Work with iOS SSL pinning',
+                'meta': '使用SSL证书固定 Work with iOS SSL pinning',
                 'commands': {
                     'disable': {
-                        'meta': '尝试在各种情况下禁用 SSL 固定。 iOS 库/类',
+                        'meta': '尝试在各种情况下禁用SSL pinning。 iOS libraries/classes',
                         'flags': ['--quiet'],
-                        'exec': 'ios_pinning.ios_disable'
+                        'exec': ios_pinning.ios_disable
                     }
                 }
             },
             'jailbreak': {
-                'meta': '使用 iOS 越狱检测',
+                'meta': 'Work with iOS Jailbreak detection',
                 'commands': {
                     'disable': {
-                        'meta': '尝试禁用越狱检测',
-                        'exec': 'jailbreak.disable'
+                        'meta': 'Attempt to disable Jailbreak detection',
+                        'exec': jailbreak.disable
                     },
-                    'imulate': {
-                        'meta': '尝试模拟越狱环境',
-                        'exec': 'jailbreak.simulate'
+                    'simulate': {
+                        'meta': 'Attempt to simulate a Jailbroken environment',
+                        'exec': jailbreak.simulate
                     },
                 }
             },
             'monitor': {
-                'meta': '用于操作 iOS 函数监控的命令',
+                'meta': 'Commands to work with ios function monitoring',
                 'commands': {
                     'crypto': {
-                        'meta': '监控 CommonCrypto 操作',
-                        'exec': 'ios_crypto.crypto_enable'
+                        'meta': 'Monitor CommonCrypto operations',
+                        'exec': ios_crypto.crypto_enable
                     }
-                }
+                },
             },
         }
     },
-
+    # macos commands
+    'macos': {
+        'meta': 'Commands specific to iOS',
+        'commands': {
+            'info': {
+                'meta': 'Get macOS and application related information',
+                'commands': {
+                    'binary': {
+                        'meta': 'Get information about application binaries and dylibs',
+                        'exec': binary.info
+                    }
+                }
+            },
+            'keychain': {
+                'meta': 'Work with the macOS keychain',
+                'commands': {
+                    'dump': {
+                        'meta': 'Dump the keychain for the current app\'s entitlement group',
+                        'flags': ['--json', '--smart'],
+                        'exec': keychain.dump
+                    },
+                    'dump_raw': {
+                        'meta': 'Dump raw, unprocessed keychain entries (advanced)',
+                        'exec': keychain.dump_raw
+                    },
+                    'clear': {
+                        'meta': 'Delete all keychain entries for the current app\'s entitlement group',
+                        'exec': keychain.clear
+                    },
+                    'add': {
+                        'meta': 'Add an entry to the iOS keychain',
+                        'flags': ['--account', '--service', '--data'],
+                        'exec': keychain.add
+                    }
+                }
+            },
+            'plist': {
+                'meta': 'Work with macOS Plists',
+                'commands': {
+                    'cat': {
+                        'meta': 'Cat a plist',
+                        'dynamic': filemanager.list_files_in_current_fm_directory,
+                        'exec': plist.cat
+                    }
+                }
+            },
+            'bundles': {
+                'meta': 'Work with macOS Bundles',
+                'commands': {
+                    'list_frameworks': {
+                        'meta': 'Lists all of the application\'s bundles that represent frameworks',
+                        'flags': ['--include-apple-frameworks', '--full-path'],
+                        'exec': bundles.show_frameworks
+                    },
+                    'list_bundles': {
+                        'meta': 'Lists all of the application\'s non framework bundles',
+                        'flags': ['--full-path'],
+                        'exec': bundles.show_bundles
+                    }
+                }
+            },
+            'nsuserdefaults': {
+                'meta': 'Work with NSUserDefaults',
+                'commands': {
+                    'get': {
+                        'meta': 'Get all of the entries',
+                        'exec': nsuserdefaults.get
+                    }
+                }
+            },
+            'nsurlcredentialstorage': {
+                'meta': 'Work with the shared NSURLCredentialStorage',
+                'commands': {
+                    'dump': {
+                        'meta': 'Dump all of the credentials in the shared NSURLCredentialStorage',
+                        'exec': nsurlcredentialstorage.dump
+                    }
+                }
+            },
+            'cookies': {
+                'meta': 'Work with shared cookies',
+                'commands': {
+                    'get': {
+                        'meta': 'Get the current apps shared cookies',
+                        'flags': ['--json'],
+                        'exec': cookies.get
+                    }
+                }
+            },
+            'heap': {
+                'meta': 'Commands to work with the macOS heap',
+                'commands': {
+                    'print': {
+                        'meta': 'Print information about objects on the iOS heap',
+                        'commands': {
+                            'ivars': {
+                                'meta': 'Print instance variables for an Objective-C object',
+                                'flags': ['--to-utf8'],
+                                'exec': ios_heap.ivars
+                            },
+                            'methods': {
+                                'meta': 'Print instance methods for an Objective-C object',
+                                'flags': ['--without-arguments'],
+                                'exec': ios_heap.methods
+                            }
+                        }
+                    },
+                    'search': {
+                        'meta': 'Search for information about the current macOS heap',
+                        'commands': {
+                            'instances': {
+                                'meta': 'Search for live instances of a particular class',
+                                'exec': ios_heap.instances
+                            }
+                        }
+                    },
+                    'execute': {
+                        'meta': 'Execute methods on objects on the macOS heap',
+                        'flags': ['--return-string'],
+                        'exec': ios_heap.execute
+                    },
+                    'evaluate': {
+                        'meta': 'Evaluate JavaScript on objects on the macOS heap',
+                        'flags': ['--inline'],
+                        'exec': ios_heap.evaluate
+                    }
+                }
+            },
+            'hooking': {
+                'meta': 'Commands used for hooking methods in iOS',
+                'commands': {
+                    'list': {
+                        'meta': 'Lists various bits of information',
+                        'commands': {
+                            'classes': {
+                                'meta': 'List classes available in the current application',
+                                'exec': ios_hooking.show_ios_classes
+                            },
+                            'class_methods': {
+                                'meta': 'List the methods in a class',
+                                'flags': ['--include-parents'],
+                                'exec': ios_hooking.show_ios_class_methods
+                            }
+                        }
+                    },
+                    'watch': {
+                        'meta': 'Watch invocations of classes and methods',
+                        'exec': ios_hooking.watch,
+                        'flags': ['--dump-args', '--dump-backtrace', '--dump-return'],
+                    },
+                    'set': {
+                        'meta': 'Set various values',
+                        'commands': {
+                            'return_value': {
+                                'meta': 'Set a methods return value. Supports only boolean returns',
+                                'exec': ios_hooking.set_method_return_value
+                            }
+                        }
+                    },
+                    'search': {
+                        'meta': 'Search for various classes and or methods',
+                        'exec': ios_hooking.search,
+                        'flags': ['--json', '--only-classes']
+                    },
+                    'generate': {
+                        'meta': 'Generate Frida hooks for macOS',
+                        'commands': {
+                            'class': {
+                                'meta': 'A generic hook manager for Classes',
+                                'exec': ios_generate.clazz
+                            },
+                            'simple': {
+                                'meta': 'Simple hooks for each Class method',
+                                'exec': ios_generate.simple
+                            }
+                        },
+                    }
+                }
+            },
+            'pasteboard': {
+                'meta': 'Work with the macOS pasteboard',
+                'commands': {
+                    'monitor': {
+                        'meta': 'Monitor the macOS pasteboard',
+                        'exec': pasteboard.monitor
+                    }
+                }
+            },
+            'sslpinning': {
+                'meta': 'Work with macOS SSL pinning',
+                'commands': {
+                    'disable': {
+                        'meta': 'Attempt to disable SSL pinning in various iOS libraries/classes',
+                        'flags': ['--quiet'],
+                        'exec': ios_pinning.ios_disable
+                    }
+                }
+            },
+            'monitor': {
+                'meta': 'Commands to work with macOS function monitoring',
+                'commands': {
+                    'crypto': {
+                        'meta': 'Monitor CommonCrypto operations',
+                        'exec': ios_crypto.crypto_enable
+                    }
+                },
+            },
+        }
+    },
     'exit': {
-        'meta': '退出',
+        'meta': 'Exit',
     },
 }
