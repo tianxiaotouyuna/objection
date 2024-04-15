@@ -619,14 +619,14 @@ COMMANDS = {
                                 'flags': ['--to-utf8'],
                                 'exec': 'ios_heap.ivars'
                             },
-                            'ethods': {
+                            'methods': {
                                 'meta': '打印 Objective-C 对象的实例方法',
                                 'flags': ['--without-arguments'],
                                 'exec': 'ios_heap.methods'
                             }
                         }
                     },
-                    'earch': {
+                    'search': {
                         'meta': '搜索当前 iOS 堆上的信息',
                         'commands': {
                             'instances': {
@@ -678,7 +678,7 @@ COMMANDS = {
                             }
                         }
                     },
-                    'earch': {
+                    'search': {
                         'meta': '搜索各种类和或方法',
                         'exec': 'ios_hooking.search',
                         'flags': ['--json', '--only-classes']
@@ -707,7 +707,7 @@ COMMANDS = {
                     }
                 }
             },
-            'slpinning': {
+            'sslpinning': {
                 'meta': '使用 iOS SSL 固定 Work with iOS SSL pinning',
                 'commands': {
                     'disable': {
